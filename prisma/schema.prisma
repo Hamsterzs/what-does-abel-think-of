@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Movies {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  stars       Float
+  review      String
+}
+
+model Band {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  stars       Float
+  review      String
+  Song        Song[]
+}
+
+model Song {
+  id     String @id @default(cuid())
+  title  String
+  stars  Float
+  review String
+  by     String
+  band   Band   @relation(fields: [by], references: [id])
+}

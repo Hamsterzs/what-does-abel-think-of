@@ -8,10 +8,12 @@ const getBand = (id: string) =>
 const Layout = async ({
   children,
   params,
-}: {
-  children: React.ReactNode;
-  params: { slug: string };
-}) => {
+}:
+  | {
+      children: React.ReactNode;
+      params: { slug: string };
+    }
+  | any) => {
   const band = await getBand(params.slug);
 
   if (!band) return "band not found";

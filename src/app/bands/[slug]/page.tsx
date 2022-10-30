@@ -6,7 +6,8 @@ import React from "react";
 const getBand = (id: string) =>
   prisma.band.findFirst({ where: { id }, include: { Song: true } });
 
-const Band = async ({ params }: { params: { songId: string } }) => {
+// | any to fix build error no idea why tho still new
+const Band = async ({ params }: { params: { songId: string } } | any) => {
   const band = await getBand(params.songId);
 
   if (!band) return <h1>404</h1>;
